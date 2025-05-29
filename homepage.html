@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeGen: A Benchmark for Real-World Recipe Image and Video Generation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f9f9f9;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 1.5rem 0;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            border-bottom: 2px solid rgba(255,255,255,0.7);
+        }
+
+        .hero-image {
+            padding: 3rem 0;
+            text-align: center;
+            background: white;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .hero-image img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero-image-caption {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 1.5rem;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section {
+            padding: 4rem 0;
+            background: white;
+            margin: 3rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #4a6491 0%, #a8c0ff 100%);
+            border-radius: 2px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 67, 113, 0.3);
+        }
+
+        .btn {
+            background: white;
+            color: #4a6491;
+            border: 2px solid #4a6491;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 67, 113, 0.2);
+            background: #f5f9ff;
+        }
+
+        .citation-box {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            overflow-x: auto;
+            border-left: 4px solid #4a6491;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a2639 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        footer p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-image img {
+                width: 100%;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">RecipeGen</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#data">Data</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#citation">Citation</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-image">
+            <div class="container">
+                <img src="overview.png" alt="RecipeGen Preview" style="background: white; padding: 20px;">
+                <div class="hero-image-caption">Preview: A sample recipe image from RecipeGen</div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About RecipeGen</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    A Benchmark Dataset for Recipe Image Generation
+                </p>
+                <p style="font-size: 1.1rem; text-align: justify; margin-bottom: 2rem; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    RecipeGen is a comprehensive dataset designed to advance research in recipe image generation. It features a diverse collection of recipes with step-by-step images, aimed at improving AI models' ability to generate realistic and contextually accurate culinary visuals.
+                </p>
+                <div class="buttons">
+                    <a href="#" class="btn btn-primary">Download Dataset</a>
+                    <a href="#" class="btn">Read Paper</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="data" class="section">
+            <div class="container">
+                <h2 class="section-title">Data</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Access the RecipeGen dataset and explore its contents.
+                </p>
+                <div class="buttons">
+                    <a href="#" class="btn btn-primary">Dataset Link 1</a>
+                    <a href="#" class="btn">Dataset Link 2</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Get in touch with the RecipeGen team for inquiries or collaboration.
+                </p>
+                <p style="text-align: center; font-size: 1.2rem; color: #4a6491;">
+                    Email: <a href="mailto:recipegen@example.com">zhangrx22@mails.jlu.edu.cn</a>
+                </p>
+            </div>
+        </section>
+
+        <section id="citation" class="section">
+            <div class="container">
+                <h2 class="section-title">Citation</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    If you use RecipeGen in your work, please cite our research:
+                </p>
+                <div class="citation-box">
+@article{recipegen2025,
+  title={RecipeGen: A Benchmark for Real-World Recipe Image and Video Generation},
+  author={RecipeGen Team},
+  journal={arXiv preprint},
+  year={2025}
+}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 RecipeGen Team. All rights reserved.</p>
+            <p>Contact: zhangrx22@mails.jlu.edu.cn</p>
+        </div>
+    </footer>
+</body>
+</html>
