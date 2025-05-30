@@ -553,7 +553,7 @@
 .video-card {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 16px;
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 0.8rem 1.5rem; /* 减少底部内边距 */
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.4);
     transition: var(--transition);
@@ -586,7 +586,7 @@
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--primary-dark);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem; /* 减小底部边距 */
 }
 
 .video-description {
@@ -655,6 +655,8 @@
 
     </section>
 
+
+    
 <section id="video-showcase" class="section">
     <div class="container">
         <h2 class="section-title">Video-Demonstrations</h2>
@@ -664,43 +666,144 @@
                 Watch sample videos from our RecipeGen dataset showcasing different cooking styles and techniques
             </p>
             
+            <!-- 步骤1 -->
+            <h3 class="step-title">Soak pork belly: Submerge the pork belly in clean water.</h3>
             <div class="videos-container">
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="video1-thumbnail.jpg">
-                            <source src="video1.mp4" type="video/mp4">
+                            <source src="video\\i2v-hunyuan-douguo\\八珍豆腐\\1.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
-                    <h3 class="video-title">Eight-treasure beancurd</h3>
-                    <p class="video-description">Blanch the squid and shrimp in the pan until browned, then remove and set aside.</p>
+                    <h3 class="video-title">i2v-hunyuan-douguo</h3>
                 </div>
                 
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="video2-thumbnail.jpg">
-                            <source src="video2.mp4" type="video/mp4">
+                            <source src="video\\i2v-opensora-douguo\\八珍豆腐\\1.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
-                    <h3 class="video-title">Barbecued pork</h3>
-                    <p class="video-description">Brush the pancetta with the sauce.</p>
+                    <h3 class="video-title">i2v-opensora-douguo</h3>
                 </div>
                 
                 <div class="video-card">
                     <div class="video-wrapper">
                         <video controls poster="video3-thumbnail.jpg">
-                            <source src="video3.mp4" type="video/mp4">
+                            <source src="video\\t2v-hunyuan-douguo\\八珍豆腐\\1.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
-                    <h3 class="video-title">Barbecued pork</h3>
-                    <p class="video-description">Oven roast.</p>
+                    <h3 class="video-title">t2v-hunyuan-douguo</h3>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video4-thumbnail.jpg">
+                            <source src="video\\t2v-opensora-douguo\\八珍豆腐\\1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">t2v-opensora-douguo</h3>
+                </div>
+            </div>
+            
+            <!-- 步骤2 -->
+            <h3 class="step-title">Prepare for marinating: Pat the pork belly dry and place it in a plastic food bag.</h3>
+            <div class="videos-container">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video1-thumbnail.jpg">
+                            <source src="video\\i2v-hunyuan-douguo\\八珍豆腐\\2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">i2v-hunyuan-douguo</h3>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video2-thumbnail.jpg">
+                            <source src="video\\i2v-opensora-douguo\\八珍豆腐\\2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">i2v-opensora-douguo</h3>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video3-thumbnail.jpg">
+                            <source src="video\\t2v-hunyuan-douguo\\八珍豆腐\\2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">t2v-hunyuan-douguo</h3>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video4-thumbnail.jpg">
+                            <source src="video\\t2v-opensora-douguo\\八珍豆腐\\2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">t2v-opensora-douguo</h3>
+                </div>
+            </div>
+            
+            <!-- 步骤3 -->
+            <h3 class="step-title">Add seasonings: Add the prepared seasonings to the bag with the pork.</h3>
+            <div class="videos-container">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video1-thumbnail.jpg">
+                            <source src="video\\i2v-hunyuan-douguo\\八珍豆腐\\3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">i2v-hunyuan-douguo</h3>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video2-thumbnail.jpg">
+                            <source src="video\\i2v-opensora-douguo\\八珍豆腐\\3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">i2v-opensora-douguo</h3>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video3-thumbnail.jpg">
+                            <source src="video\\t2v-hunyuan-douguo\\八珍豆腐\\3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">t2v-hunyuan-douguo</h3>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video4-thumbnail.jpg">
+                            <source src="video\\t2v-opensora-douguo\\八珍豆腐\\3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">t2v-opensora-douguo</h3>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
+
 
 <section id="citation" class="section">
     <section id="about" class="section">
