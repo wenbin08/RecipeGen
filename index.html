@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecipeGen: A Benchmark for Real-World Recipe Image and Video Generation</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,12 +13,27 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #4a6491;
+            --primary-dark: #2c3e50;
+            --accent: #e67e22;
+            --accent-light: #f39c12;
+            --light: #f8f9fc;
+            --dark: #1a2639;
+            --text: #333;
+            --text-light: #666;
+            --success: #27ae60;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f9f9f9;
+            color: var(--text);
+            background: linear-gradient(135deg, #f8f9fc 0%, #eef2f7 100%);
             min-height: 100vh;
+            background-attachment: fixed;
+            overflow-x: hidden;
         }
 
         .container {
@@ -26,12 +42,17 @@
             padding: 0 30px;
         }
 
+        /* Header & Navigation */
         header {
-            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
-            color: white;
-            padding: 1.5rem 0;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
         }
 
         nav {
@@ -44,76 +65,166 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
             font-weight: bold;
-            color: white;
+            color: var(--primary-dark);
             text-decoration: none;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 1.6rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: white;
+            color: var(--primary-dark);
             text-decoration: none;
             font-size: 1.1rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            position: relative;
             padding: 0.5rem 0;
-            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
         }
 
         .nav-links a:hover {
-            border-bottom: 2px solid rgba(255,255,255,0.7);
+            color: var(--accent);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-image {
-            padding: 3rem 0;
-            text-align: center;
-            background: white;
-            margin-bottom: 4rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 900px;
+            margin: 3rem auto 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-image img {
-            max-width: 90%;
+            width: 100%;
             height: auto;
             border-radius: 8px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: transform 0.5s ease;
         }
 
-        .hero-image img:hover {
-            transform: translateY(-5px);
+        .hero-image:hover img {
+            transform: scale(1.02);
         }
 
         .hero-image-caption {
             font-size: 1.1rem;
-            color: #666;
+            color: var(--text-light);
             margin-top: 1.5rem;
             font-style: italic;
             font-family: 'Playfair Display', serif;
         }
 
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            right: 10%;
+        }
+
+        /* Section Styling */
         .section {
-            padding: 4rem 0;
-            background: white;
-            margin: 3rem 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 5rem 0;
+            position: relative;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             font-weight: bold;
-            color: #2c3e50;
+            color: var(--primary-dark);
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             position: relative;
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
         }
 
         .section-title:after {
@@ -122,83 +233,251 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, #4a6491 0%, #a8c0ff 100%);
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
             border-radius: 2px;
         }
 
+        .section-content {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            margin-bottom: 2rem;
+        }
+
+        /* Stats Section */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            min-width: 200px;
+            flex: 1;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-box:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* Buttons */
         .buttons {
             display: flex;
             gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         .btn {
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #4a6491 0%, #2c3e50 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             color: white;
-            border: none;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 67, 113, 0.3);
+            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.4);
         }
 
-        .btn {
-            background: white;
-            color: #4a6491;
-            border: 2px solid #4a6491;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--primary);
+            border: 1px solid rgba(74, 100, 145, 0.2);
         }
 
-        .btn:hover {
+        .btn-secondary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(42, 67, 113, 0.2);
-            background: #f5f9ff;
+            box-shadow: 0 8px 20px rgba(42, 67, 113, 0.1);
+            background: rgba(255, 255, 255, 1);
+            border-color: var(--primary);
         }
 
+        /* Citation */
         .citation-box {
-            background: #f5f7fa;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
             padding: 2rem;
             margin-top: 2.5rem;
             font-family: 'Courier New', monospace;
-            font-size: 1rem;
+            font-size: 0.95rem;
             overflow-x: auto;
-            border-left: 4px solid #4a6491;
+            border-left: 4px solid var(--accent);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            line-height: 1.8;
         }
 
+        /* Features */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
         footer {
-            background: linear-gradient(135deg, #2c3e50 0%, #1a2639 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--dark) 100%);
             color: white;
-            text-align: center;
-            padding: 3rem 0;
+            padding: 4rem 0 2rem;
             margin-top: 4rem;
         }
 
-        footer p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
-        footer p:last-child {
-            margin-bottom: 0;
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-links h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -206,16 +485,33 @@
                 padding: 0 20px;
             }
             
-            .section-title {
-                font-size: 2rem;
-            }
-
             .nav-links {
                 display: none;
             }
-
-            .hero-image img {
-                width: 100%;
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stat-box {
+                min-width: 160px;
+                padding: 1.5rem;
+            }
+            
+            .stat-value {
+                font-size: 1.8rem;
             }
             
             .buttons {
@@ -228,94 +524,276 @@
                 text-align: center;
                 justify-content: center;
             }
+            
+            .section-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stat-box {
+                min-width: 100%;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <a href="#" class="logo">RecipeGen</a>
+            <a href="#" class="logo">
+                <i class="fas fa-utensils"></i>
+                RecipeGen
+            </a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#data">Data</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#features">Features</a></li>
                 <li><a href="#citation">Citation</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
-    <main>
-        <section class="hero-image">
-            <div class="container">
-                <img src="overview.png" alt="RecipeGen Preview" style="background: white; padding: 20px;">
+    <section class="hero">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1>RecipeGen: A Benchmark for Recipe Image and Video Generation</h1>
+                <p>The first real-world benchmark dataset designed specifically for recipe image and video generation tasks, featuring step-aligned visual content across diverse culinary traditions.</p>
+                
+                <div class="buttons">
+                    <a href="https://huggingface.co/datasets/RUOXUAN123/RecipeGen" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download Dataset
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-file-pdf"></i> Read Paper
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <img src="overview.png" alt="RecipeGen Preview">
                 <div class="hero-image-caption">Preview: A sample recipe image from RecipeGen</div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="about" class="section">
-            <div class="container">
-                <h2 class="section-title">About RecipeGen</h2>
-                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    A Benchmark Dataset for Recipe Image Generation
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About RecipeGen</h2>
+            
+            <div class="section-content">
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    A Large-Scale Multimodal Benchmark for Recipe Image and Video Generation
                 </p>
-                <p style="font-size: 1.1rem; text-align: justify; margin-bottom: 2rem; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
-                    RecipeGen is a comprehensive dataset designed to advance research in recipe image generation. It features a diverse collection of recipes with step-by-step images, aimed at improving AI models' ability to generate realistic and contextually accurate culinary visuals.
+                
+                <p style="font-size: 1.1rem; text-align: center; margin-bottom: 2rem; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    RecipeGen is the first real-world benchmark dataset designed specifically for recipe image and video generation tasks. It addresses the limitations of existing datasets by providing detailed step-level annotations with corresponding visual content.
                 </p>
+                
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-value">26,453</div>
+                        <div class="stat-label">Recipes</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="stat-value">196,724</div>
+                        <div class="stat-label">Step Images</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="stat-value">4,491</div>
+                        <div class="stat-label">Cooking Videos</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-list-ol"></i>
+                        </div>
+                        <div class="stat-value">6.4</div>
+                        <div class="stat-label">Avg Steps/Recipe</div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 2rem auto;">
+                    RecipeGen provides a robust foundation for evaluating Text-to-Image (T2I), Image-to-Video (I2V), and Text-to-Video (T2V) generation models with a focus on diverse culinary traditions.
+                </p>
+                
                 <div class="buttons">
-                    <a href="#" class="btn btn-primary">Download Dataset</a>
-                    <a href="#" class="btn">Read Paper</a>
+                    <a href="#features" class="btn btn-primary">
+                        <i class="fas fa-star"></i> Key Features
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="data" class="section">
-            <div class="container">
-                <h2 class="section-title">Data</h2>
-                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    Access the RecipeGen dataset and explore its contents.
-                </p>
-                <div class="buttons">
-                    <a href="#" class="btn btn-primary">Dataset Link 1</a>
-                    <a href="#" class="btn">Dataset Link 2</a>
+    <section id="features" class="section" style="background: rgba(248, 249, 252, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-align-left"></i>
+                    </div>
+                    <h3 class="feature-title">Step-Aligned Content</h3>
+                    <p>Detailed step-by-step textual instructions paired with corresponding visual illustrations, enabling fine-grained understanding of cooking procedures.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <h3 class="feature-title">Diverse Cooking Styles</h3>
+                    <p>Covers a wide range of regional cuisines and cooking techniques, with 158 keywords spanning different culinary traditions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3 class="feature-title">Rigorous Quality Control</h3>
+                    <p>Multi-stage filtering process including step count filtering, image quality control, and GPT-4o based text refinement.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">Contact</h2>
-                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    Get in touch with the RecipeGen team for inquiries or collaboration.
-                </p>
-                <p style="text-align: center; font-size: 1.2rem; color: #4a6491;">
-                    Email: <a href="mailto:recipegen@example.com">zhangrx22@mails.jlu.edu.cn</a>
-                </p>
-            </div>
-        </section>
-
-        <section id="citation" class="section">
-            <div class="container">
-                <h2 class="section-title">Citation</h2>
-                <p style="text-align: center; margin-bottom: 2rem; color: #555; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+    <section id="citation" class="section">
+        <div class="container">
+            <h2 class="section-title">Citation</h2>
+            
+            <div class="section-content">
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto;">
                     If you use RecipeGen in your work, please cite our research:
                 </p>
+                
                 <div class="citation-box">
-@article{recipegen2025,
+@inproceedings{recipegen2025,
   title={RecipeGen: A Benchmark for Real-World Recipe Image and Video Generation},
   author={RecipeGen Team},
-  journal={arXiv preprint},
+  booktitle={Proceedings of the 33rd ACM International Conference on Multimedia},
   year={2025}
 }
                 </div>
+                
+                <div class="buttons" style="margin-top: 2rem;">
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-quote-right"></i> BibTeX
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fas fa-file-alt"></i> APA Format
+                    </a>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
-            <p>© 2025 RecipeGen Team. All rights reserved.</p>
-            <p>Contact: zhangrx22@mails.jlu.edu.cn</p>
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <i class="fas fa-utensils"></i> RecipeGen
+                    </div>
+                    <p>A comprehensive benchmark for recipe image and video generation, advancing research in food computing and multimodal AI.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About Dataset</a></li>
+                        <li><a href="#features">Key Features</a></li>
+                        <li><a href="#data">Data Access</a></li>
+                        <li><a href="#citation">Citation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Model Zoo</a></li>
+                        <li><a href="#">GitHub Repository</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> zhangrx22@mails.jlu.edu.cn</li>
+                        <li><i class="fas fa-university"></i> Jilin University</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Changchun, China</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 RecipeGen Team. Released under the Creative Commons Attribution-NonCommercial 4.0 License.</p>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Simple animation for elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe animated elements
+            const animatedElements = document.querySelectorAll('.stat-box, .feature-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(255, 255, 255, 0.95)';
+                navLinks.style.backdropFilter = 'blur(10px)';
+                navLinks.style.padding = '2rem';
+                navLinks.style.gap = '1.5rem';
+                navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+            });
+        });
+    </script>
 </body>
 </html>
