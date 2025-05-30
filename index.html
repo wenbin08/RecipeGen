@@ -543,6 +543,68 @@
                 padding: 1.5rem;
             }
         }
+        .videos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.video-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: var(--transition);
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.video-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-top: 56.25%; /* 16:9 宽高比 */
+}
+
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.video-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.video-description {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* 响应式视频调整 */
+@media (max-width: 768px) {
+    .videos-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-card {
+        padding: 1.2rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -553,6 +615,7 @@
                 RecipeGen
             </a>
             <ul class="nav-links">
+                <li><a href="#video-showcase">Video-Demonstrations</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#citation">Citation</a></li>
@@ -590,6 +653,56 @@
         </div>
     </section>
 
+    </section>
+
+<section id="video-showcase" class="section">
+    <div class="container">
+        <h2 class="section-title">Video-Demonstrations</h2>
+        
+        <div class="section-content">
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Watch sample videos from our RecipeGen dataset showcasing different cooking styles and techniques
+            </p>
+            
+            <div class="videos-container">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video1-thumbnail.jpg">
+                            <source src="video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">Eight-treasure beancurd</h3>
+                    <p class="video-description">Blanch the squid and shrimp in the pan until browned, then remove and set aside.</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video2-thumbnail.jpg">
+                            <source src="video2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">Barbecued pork</h3>
+                    <p class="video-description">Brush the pancetta with the sauce.</p>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <video controls poster="video3-thumbnail.jpg">
+                            <source src="video3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <h3 class="video-title">Barbecued pork</h3>
+                    <p class="video-description">Oven roast.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="citation" class="section">
     <section id="about" class="section">
         <div class="container">
             <h2 class="section-title">About RecipeGen</h2>
@@ -629,7 +742,7 @@
                         <div class="stat-icon">
                             <i class="fas fa-list-ol"></i>
                         </div>
-                        <div class="stat-value">6.4</div>
+                        <div class="stat-value">7.4</div>
                         <div class="stat-label">Avg Steps/Recipe</div>
                     </div>
                 </div>
@@ -722,6 +835,7 @@
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
+                        <li><a href="#video-showcase">Video-Demonstrations</a></li>
                         <li><a href="#about">About Dataset</a></li>
                         <li><a href="#features">Key Features</a></li>
                         <li><a href="#data">Data Access</a></li>
