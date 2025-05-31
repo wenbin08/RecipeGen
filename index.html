@@ -983,7 +983,9 @@
             
             <div class="section-content">
                 <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    Comparison of performance metrics of different models for recipe generation, ingredient and condiment recognition, VQA, etc.
+                    Cooking is a complex, multi-step process that involves not only ingredients and seasonings but also factors such as cooking duration, doneness, separation of raw and cooked items, and diverse cooking techniques. To facilitate deeper understanding and structured modeling of such procedural knowledge, we generate 160450 question-answer (QA) pairs based on the collected recipe data. These QA pairs serve as a valuable resource for training and evaluating multimodal cooking models, enabling them to reason over ingredient usage, temporal order, and tool interaction.
+
+We first employ GPT-based methods to extract and categorize all ingredients and seasonings mentioned in each step. Based on the structured step descriptions, we then prompt the model to generate question-answer pairs that target three key aspects of cooking semantics: the usage order of ingredients,the application of kitchen tools (if applicable), and the details of specific cooking actions. These QA pairs serve as structured supervision signals, improving both the interpretability and the utility of the dataset for downstream tasks such as multimodal food reasoning.
                 </p>
                 
                 <div class="table-responsive">
@@ -1056,7 +1058,8 @@
                     </table>
                 </div>
                 
-                
+                <p style="text-align: center; font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 2rem auto;">
+                    VQA Score is judged by gpt-4o
             </div>
         </div>
     </section>
