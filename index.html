@@ -737,7 +737,389 @@
     </section>
 
 
+
+<section id="citation" class="section">
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About RecipeGen</h2>
+            
+            <div class="section-content">
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    A Large-Scale Multimodal Benchmark for Recipe Image and Video Generation
+                </p>
+                
+                <p style="font-size: 1.1rem; text-align: center; margin-bottom: 2rem; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    RecipeGen is the first real-world benchmark dataset designed specifically for recipe image and video generation tasks. It addresses the limitations of existing datasets by providing detailed step-level annotations with corresponding visual content.
+                </p>
+                
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-value">26,453</div>
+                        <div class="stat-label">Recipes</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div class="stat-value">196,724</div>
+                        <div class="stat-label">Step Images</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="stat-value">4,491</div>
+                        <div class="stat-label">Cooking Videos</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">
+                            <i class="fas fa-list-ol"></i>
+                        </div>
+                        <div class="stat-value">7.4</div>
+                        <div class="stat-label">Avg Steps/Recipe</div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 2rem auto;">
+                    RecipeGen provides a robust foundation for evaluating Text-to-Image (T2I), Image-to-Video (I2V), and Text-to-Video (T2V) generation models with a focus on diverse culinary traditions.
+                </p>
+                
+                <div class="buttons">
+                    <a href="#features" class="btn btn-primary">
+                        <i class="fas fa-star"></i> Key Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section" style="background: rgba(248, 249, 252, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-align-left"></i>
+                    </div>
+                    <h3 class="feature-title">Step-Aligned Content</h3>
+                    <p>Detailed step-by-step textual instructions paired with corresponding visual illustrations, enabling fine-grained understanding of cooking procedures.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <h3 class="feature-title">Diverse Cooking Styles</h3>
+                    <p>Covers a wide range of regional cuisines and cooking techniques, with 158 keywords spanning different culinary traditions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <h3 class="feature-title">Rigorous Quality Control</h3>
+                    <p>Multi-stage filtering process including step count filtering, image quality control, and GPT-4o based text refinement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     
+        <!-- 在Features部分之后，Citation部分之前添加 -->
+    <section id="model-evaluation" class="section" style="background: rgba(248, 249, 252, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Model Evaluation</h2>
+            
+            <div class="section-content">
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Cooking is a complex, multi-step process that involves not only ingredients and seasonings but also factors such as cooking duration, doneness, separation of raw and cooked items, and diverse cooking techniques. To facilitate deeper understanding and structured modeling of such procedural knowledge, we generate 160450 question-answer (QA) pairs based on the collected recipe data. These QA pairs serve as a valuable resource for training and evaluating multimodal cooking models, enabling them to reason over ingredient usage, temporal order, and tool interaction.
+
+We first employ GPT-based methods to extract and categorize all ingredients and seasonings mentioned in each step. Based on the structured step descriptions, we then prompt the model to generate question-answer pairs that target three key aspects of cooking semantics: the usage order of ingredients,the application of kitchen tools (if applicable), and the details of specific cooking actions. These QA pairs serve as structured supervision signals, improving both the interpretability and the utility of the dataset for downstream tasks such as multimodal food reasoning.
+                </p>
+                
+                <div class="table-responsive">
+                    <table class="evaluation-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Model</th>
+                                <th colspan="2">Recipe</th>
+                                <th colspan="4">Non-seasoning Ingredient</th>
+                                <th colspan="4">Seasonings</th>
+                                <th rowspan="2">VQA Score<br></th>
+                            </tr>
+                            <tr>
+                                <th>BLEU</th>
+                                <th>ROUGE</th>
+                                <th>F1 Score</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>IoU</th>
+                                <th>F1 Score</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>IoU</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LLaVA-NeXT</td>
+                                <td>3.07</td>
+                                <td>0.16</td>
+                                <td>0.3658</td>
+                                <td>0.3955</td>
+                                <td>0.3935</td>
+                                <td>0.2290</td>
+                                <td>0.2192</td>
+                                <td>0.2714</td>
+                                <td>0.2350</td>
+                                <td>0.1294</td>
+                                <td>4.40</td>
+                            </tr>
+                            <tr>
+                                <td>Qwen-VL2.5</td>
+                                <td>3.06</td>
+                                <td>0.17</td>
+                                <td>0.4548</td>
+                                <td>0.4891</td>
+                                <td>0.5083</td>
+                                <td>0.3000</td>
+                                <td>0.2755</td>
+                                <td>0.3170</td>
+                                <td>0.2916</td>
+                                <td>0.1669</td>
+                                <td>5.19</td>
+                            </tr>
+                            <tr>
+                                <td>LLAMA3.2</td>
+                                <td>2.42</td>
+                                <td>0.16</td>
+                                <td>0.4203</td>
+                                <td>0.4279</td>
+                                <td>0.5038</td>
+                                <td>0.2958</td>
+                                <td>0.1915</td>
+                                <td>0.2111</td>
+                                <td>0.2210</td>
+                                <td>0.1221</td>
+                                <td>4.68</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p style="text-align: center; font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 2rem auto;">
+                    BLEU and ROUGH are used to evaluate the similarity between the recipes and ground truth generated by macromodels such as LLaVA.F1 Score, Precision, Recall, and IoU are used to measure the ingredient recognition ability of the macromodels.VQA Score is used to evaluate the ability of the macromodels to respond to the VQA questions through gpt-4o.
+            </div>
+        </div>
+
+
+        
+    </section>
+
+    </section>
+
+<section id="benchmark-results" class="section">
+    <div class="container">
+        <h2 class="section-title">Benchmark Results</h2>
+        
+        <div class="section-content">
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Comprehensive evaluation of different models on RecipeGen benchmark across text-to-image and video generation tasks.
+            </p>
+            
+            <!-- Evaluation Metrics Table -->
+            <h3 class="feature-title" style="text-align: center; margin-bottom: 1.5rem;">Evaluation Metrics for Recipe Generation</h3>
+            <div class="table-responsive">
+                <table class="evaluation-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Goal Faithfulness</td>
+                            <td>CLIP similarity between the final image and last-step caption, measuring alignment with the overall goal.</td>
+                        </tr>
+                        <tr>
+                            <td>Step Faithfulness</td>
+                            <td>Assesses each image's alignment with its step caption using CLIP.</td>
+                        </tr>
+                        <tr>
+                            <td>Ingredient Faithfulness</td>
+                            <td>Employ GPT-4o to extract the list of ingredients involved in each step. Then, we finetune Qwen2.5-VL as a VQA model to recognize and predict the corresponding ingredients directly from the generated step images, enabling visual grounding of textual content.</td>
+                        </tr>
+                        <tr>
+                            <td>Interaction Accuracy</td>
+                            <td>Based on different interaction types—Mix up, Blend, Put on, Cover, and No relationship—we design a standardized prompt that guides GPT-4o to generate one-sentence captions grounded in visible features such as color, texture, spatial layout, and perceived fusion. We then compute the CLIP similarity score between each generated image and its corresponding caption to evaluate interaction consistency.</td>
+                        </tr>
+                        <tr>
+                            <td>Cross-Step Consistency</td>
+                            <td>Based on StackedDiffusion and DINOv2, uses l₂ distance and step count difference to assess visual and numerical consistency.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Text-to-Image Models Table -->
+            <h3 class="feature-title" style="text-align: center; margin: 3rem 0 1.5rem;">Experiments on Text-to-Image Models</h3>
+            <div class="table-responsive">
+                <table class="evaluation-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Joint Generation</th>
+                            <th>GF↑</th>
+                            <th>SF↑</th>
+                            <th>CSC↓</th>
+                            <th>IA(%)↑</th>
+                            <th>IF↑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SD1.5</td>
+                            <td>✗</td>
+                            <td>26.84</td>
+                            <td>28.40</td>
+                            <td>5.42</td>
+                            <td>36.04</td>
+                            <td>24.60</td>
+                        </tr>
+                        <tr>
+                            <td>SD2.1</td>
+                            <td>✗</td>
+                            <td>26.88</td>
+                            <td>28.51</td>
+                            <td>7.54</td>
+                            <td>39.86</td>
+                            <td>24.95</td>
+                        </tr>
+                        <tr>
+                            <td>SDXL</td>
+                            <td>✗</td>
+                            <td>27.46</td>
+                            <td>29.37</td>
+                            <td>2.98</td>
+                            <td>44.04</td>
+                            <td>24.27</td>
+                        </tr>
+                        <tr>
+                            <td>SKD</td>
+                            <td>✓</td>
+                            <td>26.62</td>
+                            <td>28.53</td>
+                            <td>0.7</td>
+                            <td>42.34</td>
+                            <td>24.71</td>
+                        </tr>
+                        <tr>
+                            <td>SD3.5</td>
+                            <td>✗</td>
+                            <td>27.42</td>
+                            <td>28.77</td>
+                            <td>2.97</td>
+                            <td>45.27</td>
+                            <td>24.11</td>
+                        </tr>
+                        <tr>
+                            <td>Flux.1-dev</td>
+                            <td>✗</td>
+                            <td>26.47</td>
+                            <td>28.31</td>
+                            <td>3.47</td>
+                            <td>38.88</td>
+                            <td>24.06</td>
+                        </tr>
+                        <tr>
+                            <td>IC-LoRA</td>
+                            <td>✓</td>
+                            <td>26.07</td>
+                            <td>26.58</td>
+                            <td>9.03</td>
+                            <td>24.28</td>
+                            <td>24.17</td>
+                        </tr>
+                        <tr>
+                            <td>RPF</td>
+                            <td>✓</td>
+                            <td>27.19</td>
+                            <td>25.99</td>
+                            <td>8.73</td>
+                            <td>31.13</td>
+                            <td>24.59</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Video Generation Models Table -->
+            <h3 class="feature-title" style="text-align: center; margin: 3rem 0 1.5rem;">Experiments on Video Generation Models</h3>
+            <div class="table-responsive">
+                <table class="evaluation-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>TASK</th>
+                            <th>GF↑</th>
+                            <th>SF↑</th>
+                            <th>CSC↓</th>
+                            <th>IA(%)↑</th>
+                            <th>IF↑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2">Hunyuan</td>
+                            <td>T2V</td>
+                            <td>29.66</td>
+                            <td>29.75</td>
+                            <td>0.02</td>
+                            <td>46.02</td>
+                            <td>29.69</td>
+                        </tr>
+                        <tr>
+                            <td>I2V</td>
+                            <td>28.56</td>
+                            <td>29.24</td>
+                            <td>0.15</td>
+                            <td>51.42</td>
+                            <td>28.73</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">Opensora</td>
+                            <td>T2V</td>
+                            <td>30.88</td>
+                            <td>30.59</td>
+                            <td>0.03</td>
+                            <td>56.20</td>
+                            <td>30.21</td>
+                        </tr>
+                        <tr>
+                            <td>I2V</td>
+                            <td>29.58</td>
+                            <td>29.14</td>
+                            <td>0.16</td>
+                            <td>55.67</td>
+                            <td>29.40</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            
+        </div>
+    </div>
+</section>
+
+<section id="video-showcase" class="section">
 <section id="video-showcase" class="section">
     <div class="container">
         <h2 class="section-title">Video-Demonstrations</h2>
@@ -881,188 +1263,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-<section id="citation" class="section">
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About RecipeGen</h2>
-            
-            <div class="section-content">
-                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    A Large-Scale Multimodal Benchmark for Recipe Image and Video Generation
-                </p>
-                
-                <p style="font-size: 1.1rem; text-align: center; margin-bottom: 2rem; line-height: 1.8; max-width: 900px; margin-left: auto; margin-right: auto;">
-                    RecipeGen is the first real-world benchmark dataset designed specifically for recipe image and video generation tasks. It addresses the limitations of existing datasets by providing detailed step-level annotations with corresponding visual content.
-                </p>
-                
-                <div class="stats-container">
-                    <div class="stat-box">
-                        <div class="stat-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="stat-value">26,453</div>
-                        <div class="stat-label">Recipes</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-icon">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <div class="stat-value">196,724</div>
-                        <div class="stat-label">Step Images</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-icon">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <div class="stat-value">4,491</div>
-                        <div class="stat-label">Cooking Videos</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-icon">
-                            <i class="fas fa-list-ol"></i>
-                        </div>
-                        <div class="stat-value">7.4</div>
-                        <div class="stat-label">Avg Steps/Recipe</div>
-                    </div>
-                </div>
-                
-                <p style="text-align: center; font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 2rem auto;">
-                    RecipeGen provides a robust foundation for evaluating Text-to-Image (T2I), Image-to-Video (I2V), and Text-to-Video (T2V) generation models with a focus on diverse culinary traditions.
-                </p>
-                
-                <div class="buttons">
-                    <a href="#features" class="btn btn-primary">
-                        <i class="fas fa-star"></i> Key Features
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="section" style="background: rgba(248, 249, 252, 0.5);">
-        <div class="container">
-            <h2 class="section-title">Key Features</h2>
-            
-            <div class="features-container">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-align-left"></i>
-                    </div>
-                    <h3 class="feature-title">Step-Aligned Content</h3>
-                    <p>Detailed step-by-step textual instructions paired with corresponding visual illustrations, enabling fine-grained understanding of cooking procedures.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-globe-asia"></i>
-                    </div>
-                    <h3 class="feature-title">Diverse Cooking Styles</h3>
-                    <p>Covers a wide range of regional cuisines and cooking techniques, with 158 keywords spanning different culinary traditions.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-filter"></i>
-                    </div>
-                    <h3 class="feature-title">Rigorous Quality Control</h3>
-                    <p>Multi-stage filtering process including step count filtering, image quality control, and GPT-4o based text refinement.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        <!-- 在Features部分之后，Citation部分之前添加 -->
-    <section id="model-evaluation" class="section" style="background: rgba(248, 249, 252, 0.5);">
-        <div class="container">
-            <h2 class="section-title">Model Evaluation</h2>
-            
-            <div class="section-content">
-                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    Cooking is a complex, multi-step process that involves not only ingredients and seasonings but also factors such as cooking duration, doneness, separation of raw and cooked items, and diverse cooking techniques. To facilitate deeper understanding and structured modeling of such procedural knowledge, we generate 160450 question-answer (QA) pairs based on the collected recipe data. These QA pairs serve as a valuable resource for training and evaluating multimodal cooking models, enabling them to reason over ingredient usage, temporal order, and tool interaction.
-
-We first employ GPT-based methods to extract and categorize all ingredients and seasonings mentioned in each step. Based on the structured step descriptions, we then prompt the model to generate question-answer pairs that target three key aspects of cooking semantics: the usage order of ingredients,the application of kitchen tools (if applicable), and the details of specific cooking actions. These QA pairs serve as structured supervision signals, improving both the interpretability and the utility of the dataset for downstream tasks such as multimodal food reasoning.
-                </p>
-                
-                <div class="table-responsive">
-                    <table class="evaluation-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">Model</th>
-                                <th colspan="2">Recipe</th>
-                                <th colspan="4">Non-seasoning Ingredient</th>
-                                <th colspan="4">Seasonings</th>
-                                <th rowspan="2">VQA Score<br></th>
-                            </tr>
-                            <tr>
-                                <th>BLEU</th>
-                                <th>ROUGE</th>
-                                <th>F1 Score</th>
-                                <th>Precision</th>
-                                <th>Recall</th>
-                                <th>IoU</th>
-                                <th>F1 Score</th>
-                                <th>Precision</th>
-                                <th>Recall</th>
-                                <th>IoU</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>LLaVA-NeXT</td>
-                                <td>3.07</td>
-                                <td>0.16</td>
-                                <td>0.3658</td>
-                                <td>0.3955</td>
-                                <td>0.3935</td>
-                                <td>0.2290</td>
-                                <td>0.2192</td>
-                                <td>0.2714</td>
-                                <td>0.2350</td>
-                                <td>0.1294</td>
-                                <td>4.40</td>
-                            </tr>
-                            <tr>
-                                <td>Qwen-VL2.5</td>
-                                <td>3.06</td>
-                                <td>0.17</td>
-                                <td>0.4548</td>
-                                <td>0.4891</td>
-                                <td>0.5083</td>
-                                <td>0.3000</td>
-                                <td>0.2755</td>
-                                <td>0.3170</td>
-                                <td>0.2916</td>
-                                <td>0.1669</td>
-                                <td>5.19</td>
-                            </tr>
-                            <tr>
-                                <td>LLAMA3.2</td>
-                                <td>2.42</td>
-                                <td>0.16</td>
-                                <td>0.4203</td>
-                                <td>0.4279</td>
-                                <td>0.5038</td>
-                                <td>0.2958</td>
-                                <td>0.1915</td>
-                                <td>0.2111</td>
-                                <td>0.2210</td>
-                                <td>0.1221</td>
-                                <td>4.68</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <p style="text-align: center; font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 2rem auto;">
-                    VQA Score is judged by gpt-4o
-            </div>
-        </div>
-    </section>
 
 
 
