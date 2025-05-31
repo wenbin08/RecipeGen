@@ -595,6 +595,77 @@
     line-height: 1.5;
 }
 
+.hero-video-container {
+    margin-top: 2rem;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    display: block;
+}
+/* Model Evaluation Table */
+.table-responsive {
+    overflow-x: auto;
+    margin: 1rem 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 12px;
+}
+
+.evaluation-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(74, 100, 145, 0.1);
+    margin-bottom: 0;
+}
+
+.evaluation-table th, 
+.evaluation-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid rgba(74, 100, 145, 0.1);
+}
+
+.evaluation-table thead {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+.evaluation-table th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.evaluation-table tbody tr:nth-child(even) {
+    background-color: rgba(248, 249, 252, 0.6);
+}
+
+.evaluation-table tbody tr:hover {
+    background-color: rgba(230, 126, 34, 0.05);
+}
+
+@media (max-width: 768px) {
+    .evaluation-table th, 
+    .evaluation-table td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+}
 /* 响应式视频调整 */
 @media (max-width: 768px) {
     .videos-container {
@@ -615,11 +686,13 @@
                 RecipeGen
             </a>
             <ul class="nav-links">
-                <li><a href="#video-showcase">Video-Demonstrations</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#citation">Citation</a></li>
-                <li><a href="#contact">Contact</a></li>
+    <li><a href="#video-showcase">Video-Demonstrations</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#model-evaluation">Evaluation</a></li>
+    <li><a href="#citation">Citation</a></li>
+    <li><a href="#contact">Contact</a></li>
+</ul>
             </ul>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
@@ -647,9 +720,17 @@
             </div>
             
             <div class="hero-image">
-                <img src="overview.png" alt="RecipeGen Preview">
-                <div class="hero-image-caption">Preview: A sample recipe image from RecipeGen</div>
-            </div>
+    <img src="overview.png" alt="RecipeGen Preview">
+    <div class="hero-image-caption">Preview: A sample recipe image from RecipeGen</div>
+    
+    <div class="hero-video-container">
+        <video controls class="hero-video" poster="video-thumbnail.jpg">
+            <source src="video.mp4" type="video/mp4">
+            您的浏览器不支持视频标签。
+        </video>
+        <div class="hero-image-caption">RecipeGen Demo Video</div>
+    </div>
+</div>
         </div>
     </section>
 
@@ -663,7 +744,7 @@
         
         <div class="section-content">
             <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-                Watch sample videos from our RecipeGen dataset showcasing different cooking styles and techniques
+                Here are some examples of video generation models generating recipes.
             </p>
             
             <!-- 步骤1 -->
@@ -894,6 +975,94 @@
             </div>
         </div>
     </section>
+
+        <!-- 在Features部分之后，Citation部分之前添加 -->
+    <section id="model-evaluation" class="section" style="background: rgba(248, 249, 252, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Model Evaluation</h2>
+            
+            <div class="section-content">
+                <p style="text-align: center; margin-bottom: 2rem; color: var(--text-light); font-size: 1.2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Comparison of performance metrics of different models for recipe generation, ingredient and condiment recognition, VQA, etc.
+                </p>
+                
+                <div class="table-responsive">
+                    <table class="evaluation-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Model</th>
+                                <th colspan="2">Recipe</th>
+                                <th colspan="4">Non-seasoning Ingredient</th>
+                                <th colspan="4">Seasonings</th>
+                                <th rowspan="2">VQA Score<br></th>
+                            </tr>
+                            <tr>
+                                <th>BLEU</th>
+                                <th>ROUGE</th>
+                                <th>F1 Score</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>IoU</th>
+                                <th>F1 Score</th>
+                                <th>Precision</th>
+                                <th>Recall</th>
+                                <th>IoU</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LLaVA-NeXT</td>
+                                <td>3.07</td>
+                                <td>0.16</td>
+                                <td>0.3658</td>
+                                <td>0.3955</td>
+                                <td>0.3935</td>
+                                <td>0.2290</td>
+                                <td>0.2192</td>
+                                <td>0.2714</td>
+                                <td>0.2350</td>
+                                <td>0.1294</td>
+                                <td>4.40</td>
+                            </tr>
+                            <tr>
+                                <td>Qwen-VL2.5</td>
+                                <td>3.06</td>
+                                <td>0.17</td>
+                                <td>0.4548</td>
+                                <td>0.4891</td>
+                                <td>0.5083</td>
+                                <td>0.3000</td>
+                                <td>0.2755</td>
+                                <td>0.3170</td>
+                                <td>0.2916</td>
+                                <td>0.1669</td>
+                                <td>5.19</td>
+                            </tr>
+                            <tr>
+                                <td>LLAMA3.2</td>
+                                <td>2.42</td>
+                                <td>0.16</td>
+                                <td>0.4203</td>
+                                <td>0.4279</td>
+                                <td>0.5038</td>
+                                <td>0.2958</td>
+                                <td>0.1915</td>
+                                <td>0.2111</td>
+                                <td>0.2210</td>
+                                <td>0.1221</td>
+                                <td>4.68</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+
+
 
     <section id="citation" class="section">
         <div class="container">
